@@ -16,4 +16,52 @@ const createNewUser = async (userObj) => {
   return data
 }
 
+const findAllUsers = async () => {
+  const data = await Users.findAll()
+  return data
+}
+
+const findUserById = async (id) => {
+  const data = await Users.findOne({
+    where: {
+      id: id
+    }
+  })
+  return data
+}
+
+const updateUser = async (id, userObj) => {
+
+  const selectedUser = await Users.findOne({
+    where: {
+      id: id
+    }
+  })
+
+  if (!selectedUser) return null
+
+  const modifiedUser = await selectedUser.update(userObj)
+  return modifiedUser
+}
+
+const deleteUser = async (id) => {
+  const user = await Users.destroy({
+    where: {
+      id: id
+    }
+  })
+  return user // 1 || 0
+}
+
+module.exports = {
+  createNewUser,
+  findAllUsers,
+  findUserById,
+  updateUser,
+  deleteUser
+}
+
+
+
+
 // const { hashPassword, comparePassword } = require('../utils/crypto')
