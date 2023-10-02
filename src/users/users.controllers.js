@@ -30,6 +30,15 @@ const findUserById = async (id) => {
   return data
 }
 
+const findUserByEmail = async (email) => {
+  const data = await Users.findOne({
+    where: {
+      email: email
+    }
+  })
+  return data
+}
+
 const updateUser = async (id, userObj) => {
 
   const selectedUser = await Users.findOne({
@@ -57,6 +66,7 @@ module.exports = {
   createNewUser,
   findAllUsers,
   findUserById,
+  findUserByEmail,
   updateUser,
   deleteUser
 }
