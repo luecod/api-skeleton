@@ -13,8 +13,8 @@ const postLogin = (req, res) => {
         role: data.role,
         firstName: data.firstName,
         lastName: data.lastName,
-        email: data.email
-      }, 'Alt4irTesis')
+        // email: data.email
+      }, 'Alt4irTesis', { expiresIn: '10h' })
       return res.status(200).json(token)
       // return res.status(200).json(data)
     })

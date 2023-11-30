@@ -24,9 +24,25 @@ db.sync()
 app.use(express.json())
 app.use(cors())
 
-app.get('/', (req, res) => {
+const loggerMiddleware = (req, res, next) => {
+  console.log(`${req.method} | ${req.path}`)
+  // req.message = 'Hola desde el middleware'
+  // next()
+  if (req.method !== 'DELETE') {
+    // req.message = 'Hola desde el middleware'
+    next()
+    return
+  } else {
+    res.status(400).json({ message: 'No elimines' })
+  }
+}
+
+// app.use(loggerMiddleware) //? Middleware global
+
+app.get('/', loggerMiddleware, (req, res) => {
   res.json({
     message: 'Server OK',
+    myMessage: req.message,
     // myMessage: process.env.MESSAGE,
     // myPort: process.env.PORT
   })
