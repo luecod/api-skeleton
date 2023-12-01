@@ -68,9 +68,16 @@ const deleteUser = (req, res) => {
     })
 }
 
+const getMyUser = (req, res) => {
+  const user = req.user
+  res.status(200).json(user)
+
+}
+
 module.exports = {
   getAllUsers,
   getUserById,
+  getMyUser,
   postNewUser,
   patchUser,
   deleteUser
